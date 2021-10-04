@@ -5,3 +5,8 @@
 .flashes h4 {
     line-height: 2;
 }
+
+a {
+    text-decoration: none;
+    color: #616161;
+}
