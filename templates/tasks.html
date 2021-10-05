@@ -17,6 +17,7 @@
             <div class="collapsible-body">
                 <strong>Location : </strong><em>{{ task.site_name }}</em>
                 <p>{{ task.task_description }}</p>
+                <p><em>By: {{ task.created_by }}</em></p>
             </div>
         </li>
         {% endfor %}
