@@ -10,3 +10,7 @@ a {
     text-decoration: none;
     color: #616161;
 }
+
+.datepicker-date-display {
+    background-color: grey;
+}
