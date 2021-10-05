@@ -1,6 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3 class="darken-2 text-darken-2 center-align">All Tasks Outstanding</h3>
+    <h3 class="darken-2 text-darken-2 center-align">All Tasks Outstanding</h3>
 
+    <!-- task popouts -->
+    <ul class="collapsible popout">
+        <li>
+            <div class="collapsible-header white-text grey darken-1 text-shadow"><i class="fas fa-caret-down"></i>Task 1</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        </li>
+        <li>
+            <div class="collapsible-header white-text grey darken-1 text-shadow"><i class="fas fa-caret-down"></i>Task 2</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        </li>
+        <li>
+            <div class="collapsible-header white-text grey darken-1 text-shadow"><i class="fas fa-caret-down"></i>Task 3</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        </li>
+    </ul>
 {% endblock %}
