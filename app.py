@@ -5,6 +5,8 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask.ext.security import login_required
+
 if os.path.exists("env.py"):
     import env
 
@@ -151,13 +153,29 @@ def delete_task(task_id):
 
 
 @app.route("/locations")
+@login_required
 def locations():
-    locations = list(mongo.db.location.find().sort("site_name", 1))
-    return render_template("locations.html", location=locations)
+    if "user" in session:
+        user = mongo.db.users.find_one({"username": session["user"]})
+        if user["is_admin"]:
+            locations = list(
+                mongo.db.location.find().sort("site_name", 1))
+            return render_template("locations.html", location=locations)
+        else:
+            flash("You do not have permission to view this page")
+            return redirect(url_for("get_tasks", username=session["user"]))
+
+    # locations = list(mongo.db.location.find().sort("site_name", 1))
+    # return render_template("locations.html", location=locations)
+
+
+@app.route("/add_site", methods=["GET", "POST"])
+def add_site():
+    return render_template("add_site.html")
 
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)
 # change debug to false once completed

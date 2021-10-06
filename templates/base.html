@@ -27,7 +27,7 @@
           {% if session.user %}
             <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
             <li><a href="{{ url_for('add_task') }}">New Task</a></li>
-            {% if session.user|lower == "admin"|lower %}
+            {% if users.is_admin == True %}
               <li><a href="{{ url_for('locations') }}">Site Locations</a></li>
             {% endif %}
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>

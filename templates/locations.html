@@ -3,6 +3,13 @@
 
     <h3 class="darken-2 text-darken-2 center-align">Manage Locations</h3>
 
+    <div class="row">
+        <div class="col s12 center-align">
+            <a href="{{ url_for('add_site') }}" class="btn-large light-blue darken-3 text-shadow">
+                Add Location <i class="fas fa-plus-circle right"></i>
+            </a>
+        </div>
+    </div>
 
     <div class="row">
         {% for locations in location %}
