@@ -123,6 +123,14 @@ def add_task():
     return render_template("add_task.html", site_name=site_name)
 
 
+@app.route("/edit_task/<task_id>", methods=["GET", "POST"])
+def edit_task(task_id):
+    task = mongo.db.tasks.find_one({"_id": ObjectId(task_id)})
+
+    site_name = mongo.db.location.find().sort("site_name", 1)
+    return render_template("edit_task.html", task=task, site_name=site_name)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
