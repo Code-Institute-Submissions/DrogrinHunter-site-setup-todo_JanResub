@@ -150,6 +150,12 @@ def delete_task(task_id):
     return redirect(url_for("get_tasks"))
 
 
+@app.route("/locations")
+def locations():
+    locations = list(mongo.db.location.find().sort("site_name", 1))
+    return render_template("locations.html", location=locations)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
