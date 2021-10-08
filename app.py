@@ -166,9 +166,10 @@ def add_site():
         location = {
             "site_name": request.form.get("site_name")
         }
-        mongo.db.locations.insert_one(location)
+        mongo.db.location.insert_one(location)
         flash("New Location Added")
-        return redirect(url_for("add_site"))
+        return redirect(url_for("locations"))
+        
     return render_template("add_site.html")
 
 
