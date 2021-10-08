@@ -175,6 +175,14 @@ def add_site():
 
 @app.route("/edit_site/<site_id>", methods=["GET", "POST"])
 def edit_site(site_id):
+    if request.method == "POST":
+        submit = {
+            "site_name": request.form.get("site_name")
+        }
+        mongo.db.location.update({"_id": ObjectId(site_id)}, submit)
+        flash("Location Successfully Updated")
+        return redirect(url_for("locations"))
+        
     locations = mongo.db.location.find_one({"_id": ObjectId(site_id)})
     return render_template("edit_site.html", location=locations)
 
