@@ -173,6 +173,12 @@ def add_site():
     return render_template("add_site.html")
 
 
+@app.route("/edit_site/<site_id>", methods=["GET", "POST"])
+def edit_site(site_id):
+    locations = mongo.db.location.find_one({"_id": ObjectId(site_id)})
+    return render_template("edit_site.html", location=locations)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

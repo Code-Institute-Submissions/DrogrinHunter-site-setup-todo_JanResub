@@ -19,7 +19,7 @@
                         <span class="card-title">{{ locations.site_name}}</span>
                     </div>
                     <div class="card-action">
-                        <a href="#" class="btn green accent-3">Edit</a>
+                        <a href="{{ url_for('edit_site', site_id=locations._id) }}" class="btn green accent-3">Edit</a>
                         <a href="#" class="btn light-blue darken-1">Delete</a>
                     </div>
                 </div>
