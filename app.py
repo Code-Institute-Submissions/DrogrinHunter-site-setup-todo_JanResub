@@ -169,7 +169,7 @@ def add_site():
         mongo.db.location.insert_one(location)
         flash("New Location Added")
         return redirect(url_for("locations"))
-        
+
     return render_template("add_site.html")
 
 
@@ -182,9 +182,16 @@ def edit_site(site_id):
         mongo.db.location.update({"_id": ObjectId(site_id)}, submit)
         flash("Location Successfully Updated")
         return redirect(url_for("locations"))
-        
+
     locations = mongo.db.location.find_one({"_id": ObjectId(site_id)})
     return render_template("edit_site.html", location=locations)
+
+
+@app.route("/delete_site/<site_id>")
+def delete_site(site_id):
+    mongo.db.location.remove({"_id": ObjectId(site_id)})
+    flash("Location Successfully Removed")
+    return redirect(url_for("locations"))
 
 
 if __name__ == "__main__":
