@@ -2,7 +2,7 @@
 {% block content %}
 
     <h3 class="darken-2 text-darken-2 center-align">All Tasks Outstanding</h3>
-
+    <!-- search function -->
     <div class="row card-panel grey lighten-4">
         <form action="{{ url_for('search') }}" method="post" class="col s12">
             <div class="row valign-wrapper center-align">
@@ -53,4 +53,5 @@
     {% else %}
         <h3 class="red-text darken-2 text-darken-2 center-align">No Results Found</h3>
     {% endif %}
+
 {% endblock %}
