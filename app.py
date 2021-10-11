@@ -118,7 +118,6 @@ def logout():
 
 @app.route("/add_task", methods=["GET", "POST"])
 def add_task():
-    if "user" in session.keys() == True:
         if request.method == "POST":
             is_urgent = "on" if request.form.get("is_urgent") else "off"
             task = {
@@ -136,7 +135,6 @@ def add_task():
 
         site_name = mongo.db.location.find().sort("site_name", 1)
         return render_template("add_task.html", site_name=site_name)
-    return redirect(url_for("login")
 
 
 @app.route("/edit_task/<task_id>", methods=["GET", "POST"])
