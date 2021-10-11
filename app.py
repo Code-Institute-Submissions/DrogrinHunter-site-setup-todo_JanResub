@@ -54,8 +54,10 @@ def login():
 
 @app.route("/get_tasks")
 def get_tasks():
-    tasks = list(mongo.db.tasks.find())
-    return render_template("tasks.html", tasks=tasks)
+    if "user" in session.keys() == True:
+        tasks = list(mongo.db.tasks.find())
+        return render_template("tasks.html", tasks=tasks)
+    return redirect(url_for("login"))
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -94,11 +96,15 @@ def register():
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # this takes the session user's username from the db
-    username = mongo.db.users.find_one(
+    username_mongo = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+    if username == username_mongo:
+        tasks = list(mongo.db.tasks.find({
+            "created_by": username_mongo
+        }))
+        return render_template("profile.html", username=username, tasks=tasks)
 
-    if session["user"]:
-        return render_template("profile.html", username=username)
+    session.pop("user")
     return redirect(url_for("login"))
 
 
@@ -112,23 +118,25 @@ def logout():
 
 @app.route("/add_task", methods=["GET", "POST"])
 def add_task():
-    if request.method == "POST":
-        is_urgent = "on" if request.form.get("is_urgent") else "off"
-        task = {
-            "site_name": request.form.get("site_name"),
-            "task_name": request.form.get("task_name"),
-            "task_description": request.form.get("task_description"),
-            "is_urgent": is_urgent,
-            "due_date": request.form.get("due_date"),
-            "created_by": session["user"]
+    if "user" in session.keys() == True:
+        if request.method == "POST":
+            is_urgent = "on" if request.form.get("is_urgent") else "off"
+            task = {
+                "site_name": request.form.get("site_name"),
+                "task_name": request.form.get("task_name"),
+                "task_description": request.form.get("task_description"),
+                "is_urgent": is_urgent,
+                "due_date": request.form.get("due_date"),
+                "created_by": session["user"]
 
-        }
-        mongo.db.tasks.insert_one(task)
-        flash("Task Has Been Successfully Added")
-        return redirect(url_for("get_tasks"))
+            }
+            mongo.db.tasks.insert_one(task)
+            flash("Task Has Been Successfully Added")
+            return redirect(url_for("get_tasks"))
 
-    site_name = mongo.db.location.find().sort("site_name", 1)
-    return render_template("add_task.html", site_name=site_name)
+        site_name = mongo.db.location.find().sort("site_name", 1)
+        return render_template("add_task.html", site_name=site_name)
+    return redirect(url_for("login")
 
 
 @app.route("/edit_task/<task_id>", methods=["GET", "POST"])
@@ -160,21 +168,26 @@ def delete_task(task_id):
 
 @app.route("/locations")
 def locations():
-    locations = list(mongo.db.location.find().sort("site_name", 1))
-    return render_template("locations.html", location=locations)
+    if "user" in session.keys() == True:
+        locations = list(mongo.db.location.find().sort("site_name", 1))
+        return render_template("locations.html", location=locations)
+
+    return redirect(url_for("login"))
 
 
 @app.route("/add_site", methods=["GET", "POST"])
 def add_site():
-    if request.method == "POST":
-        location = {
-            "site_name": request.form.get("site_name")
-        }
-        mongo.db.location.insert_one(location)
-        flash("New Location Added")
-        return redirect(url_for("locations"))
+    if "user" in session.keys() == True:
+        if request.method == "POST":
+            location = {
+                "site_name": request.form.get("site_name")
+            }
+            mongo.db.location.insert_one(location)
+            flash("New Location Added")
+            return redirect(url_for("locations"))
+        return render_template("add_site.html")
 
-    return render_template("add_site.html")
+    return redirect(url_for("login"))
 
 
 @app.route("/edit_site/<site_id>", methods=["GET", "POST"])
