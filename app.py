@@ -54,10 +54,8 @@ def login():
 
 @app.route("/get_tasks")
 def get_tasks():
-    if "user" in session.keys() == True:
-        tasks = list(mongo.db.tasks.find())
-        return render_template("tasks.html", tasks=tasks)
-    return redirect(url_for("login"))
+    tasks = list(mongo.db.tasks.find())
+    return render_template("tasks.html", tasks=tasks)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -118,23 +116,23 @@ def logout():
 
 @app.route("/add_task", methods=["GET", "POST"])
 def add_task():
-        if request.method == "POST":
-            is_urgent = "on" if request.form.get("is_urgent") else "off"
-            task = {
-                "site_name": request.form.get("site_name"),
-                "task_name": request.form.get("task_name"),
-                "task_description": request.form.get("task_description"),
-                "is_urgent": is_urgent,
-                "due_date": request.form.get("due_date"),
-                "created_by": session["user"]
+    if request.method == "POST":
+        is_urgent = "on" if request.form.get("is_urgent") else "off"
+        task = {
+            "site_name": request.form.get("site_name"),
+            "task_name": request.form.get("task_name"),
+            "task_description": request.form.get("task_description"),
+            "is_urgent": is_urgent,
+            "due_date": request.form.get("due_date"),
+            "created_by": session["user"]
 
-            }
-            mongo.db.tasks.insert_one(task)
-            flash("Task Has Been Successfully Added")
-            return redirect(url_for("get_tasks"))
+        }
+        mongo.db.tasks.insert_one(task)
+        flash("Task Has Been Successfully Added")
+        return redirect(url_for("get_tasks"))
 
-        site_name = mongo.db.location.find().sort("site_name", 1)
-        return render_template("add_task.html", site_name=site_name)
+    site_name = mongo.db.location.find().sort("site_name", 1)
+    return render_template("add_task.html", site_name=site_name)
 
 
 @app.route("/edit_task/<task_id>", methods=["GET", "POST"])
@@ -166,16 +164,13 @@ def delete_task(task_id):
 
 @app.route("/locations")
 def locations():
-    if "user" in session.keys() == True:
-        locations = list(mongo.db.location.find().sort("site_name", 1))
-        return render_template("locations.html", location=locations)
-
-    return redirect(url_for("login"))
+    locations = list(mongo.db.location.find().sort("site_name", 1))
+    return render_template("locations.html", location=locations)
 
 
 @app.route("/add_site", methods=["GET", "POST"])
 def add_site():
-    if "user" in session.keys() == True:
+    if "user" in session.keys() is True:
         if request.method == "POST":
             location = {
                 "site_name": request.form.get("site_name")
