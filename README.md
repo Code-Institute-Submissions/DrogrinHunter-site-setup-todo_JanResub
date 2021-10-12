@@ -15,6 +15,7 @@ Willmore's Site Setups
     - [Potential Future Features](#Potential-Future-Features)
 - [**Technologies Used**](#Technologies-Used)
 - [**Testing**](#Testing)
+- [**Code Validation**](#CodeValidation)
 - [**Deployment**](#Deployment)
     - [Live Website](#Live-Website)
     - [Repository Link](#Repository-Link)
@@ -72,6 +73,7 @@ For the font, I used Google Font's Roboto with Sans Serif as the backup just in 
 
 ### Wireframes
 
+Wireframes - [Wireframes](readme/wireframes/wireframes)
 
 ---
 
@@ -94,3 +96,107 @@ For the font, I used Google Font's Roboto with Sans Serif as the backup just in 
 if "user" in session.keys() == True:
 return redirect(url_for("login")
 ``` 
+
+---
+
+## Technologies Used
+- Materialize
+    - Materialize was used for page structures, theming and features such as NavBars, Collapsible, Footer.
+
+- HTML
+    - HTML was used for the main structure of the website.
+
+- CSS
+    - CSS was used to style and change sizes and positions of different items where Materialize was not able too or enhancing the styling that Materialize used.
+
+- JQuery
+    - JQuery was used for Materialize features that needed javascript functions. 
+
+- Python
+    - Flask
+        - Flask was used for rendering templates, URI's, Redirects, Requests, Returns and Flash messages.
+    
+    - BSON
+        - BSON was used to access the data in MongoDB and to access the ID's from the database.
+    
+    - Werkzeug
+        - Werkzeug was used to hash password entries when registering, logging in to the site and encrypting on MongoDB.
+
+- MongoDB
+    - MongoDB was used to store all of the data used for the website.
+
+- Google Chrome
+    - Chrome inspect and developer tool was used for testing the website on different devices.
+
+- Google Fonts 
+    - Google Fonts was used for the font of the website.
+
+- Font Awesome
+    - FA was used for the icons on the forms and buttons.
+
+- Balsamiq
+    - Balsamiq was used to create the wireframes.
+
+## Testing
+
+### Main Testing
+
+Throughout the entirety of the project, I have been testing the app in a web browser testing the functions and features that I have added and correcting the issues as I go. 
+
+### Responsive Testing
+
+To check how the site ran on different devices, I used Am-I-Responsive and inspecting in Google Chrome Developer Tools. I also pushed the app to Heroku to test throughout the project to test on other devices (iPhone, Wide Screen Monitor and iPad).
+
+Throughout the responsive testing, I was testing on all devices and screen sizes the hamburger icon and side menu, the navigation and links on bigger sizes as well as the footer. 
+
+### Additional Testing
+
+I also carried out the following: 
+- Adding users, tasks and locations to ensure that it passed through to the database. 
+- I deleted tasks and locations to ensure that it deleted it from the database.
+- I edited tasks and locations to ensure that the information pulled through to the edit page as well as updating it in the database. 
+
+### Code Validation
+- W3C Markup Validation for HTML.
+- W3C CSS Validation Service was for validating the custom CSS code (custom code not being the Materialize CSS).
+
+## Deployment
+
+### Live Website Link
+https://site-setup-todo.herokuapp.com/
+
+### Repository Link
+https://github.com/DrogrinHunter/site-setup-todo
+
+### Running Code Locally
+
+To deploy the project, the following is required: 
+- Python3
+- Github account
+- Heroku account
+- MongoDB account
+
+To create a clone of the project, follow the below: 
+1. Login into GitHub and browse to the specified URL.
+2. Click Code and open with GitHub Desktop.
+3. Follow the prompts in the GitHub Desktop Application.
+
+## Credits
+
+### Code 
+
+I used the following links to help with this project:
+- Code Institute's task project for basic setup and linking to the MongoDB. 
+- https://stackoverflow.com/ - for various issues when writing queries in Python.
+- https://www.w3schools.com/python/default.asp - for extra help with Python.
+
+### Content
+
+All content used for the site, whether Locations or Tasks are based on my current employer however it's been designed to be utilised for different companies.
+
+### Acknowledgements
+
+I would like to thank the below for help and guidance:
+- Miguel Martinez (Mentor)
+- The Slack community for the ability for me to search for similar issues that I've had. 
+- Code Institute for the programme and the task mini project. 
