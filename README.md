@@ -73,7 +73,7 @@ For the font, I used Google Font's Roboto with Sans Serif as the backup just in 
 
 ### Wireframes
 
-Wireframes - [Wireframes](readme/wireframes/wireframes)
+Wireframes - [Wireframes](readme/wireframes/wireframes.pdf)
 
 ---
 
