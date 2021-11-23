@@ -1,8 +1,8 @@
 * {
-    font-family: Roboto, San serif;
+    font-family: Roboto, 'San serif';
 }
 .text-shadow {
-    text-shadow: 2px 2px 2px rgba(0,0,0,0,0.5);
+    text-shadow: 2px 2px 2px black;
 }
 
 .flashes h4 {
